@@ -1,0 +1,31 @@
+st3=>start: start foo
+io5=>inputoutput: input: a, b
+op8=>operation: a = deo(a, b)
+cond11=>condition: if a
+cond16=>condition: if b
+cond21=>condition: if (a & b)
+op25=>operation: a = (b + 1)
+op32=>operation: b = 1
+op39=>operation: a += 10
+io49=>inputoutput: output:  (a + b)
+e47=>end: end function return
+op29=>operation: b = (a + 1)
+op36=>operation: a = 1
+op43=>operation: b += 1
+
+st3->io5
+io5->op8
+op8->cond11
+cond11(yes)->cond16
+cond16(yes)->cond21
+cond21(yes)->op25
+op25->op32
+op32->op39
+op39->io49
+io49->e47
+cond21(no)->op29
+op29->op32
+cond16(no)->op36
+op36->op39
+cond11(no)->op43
+op43->io49
