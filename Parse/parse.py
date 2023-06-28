@@ -29,10 +29,12 @@ def parse(code,file,fun_name_list):
     
     counter = 0
     else_operation = None
+    jsx_nodes += "{ id: 'PicInput', position: { x: 0, y: -100}, data: { label: 'Input:' , sor: pic}, type:'PicNode' },\n"
     for n in range(len(nodes)):
         counter += 1
         temp = nodes[n].split("=>")
         temp2 = temp[1].split(':')
+
         if(check_fun_name(temp2[1],fun_name_list)):
             FunctionNodes += [temp[0]]
             jsx_nodes += "{ id: '" + temp[0] + "', position: { x: -86, y: " + str(counter*100)
@@ -41,12 +43,9 @@ def parse(code,file,fun_name_list):
         else:
             jsx_nodes += "{ id: '" + temp[0] + "', position: { x: 0, y: " + str(counter*100)
             if(temp2[0] == "inputoutput"):
-                if temp2[1] == " input":
-                    jsx_nodes += "}, data: { label: 'Input:' , sor: pic}, type:'PicNode' },\n"
-                    counter += 1
-                else:
-                    jsx_nodes += "}, data: { label: 'Output:' , sor: pic}, type:'PicNode' },\n" 
-                    counter += 1           
+                # Because we specify the field in the flowchart part, there will only be output
+                jsx_nodes += "}, data: { label: 'Output:' , sor: pic}, type:'PicNode' },\n" 
+                counter += 1           
             elif(temp2[0] == "condition"):
                 ConditionYCor += [(counter*100)]
                 jsx_nodes += "}, data: { label: '" + temp2[1] + "' }, type: 'ConditionNode' },\n"
@@ -54,8 +53,6 @@ def parse(code,file,fun_name_list):
                 jsx_nodes += "}, data: { label: '" + temp2[1] + "' }, type: 'output' },\n"
                 else_operation = nodes[n+1:]
                 break
-            elif(counter == 1):
-                jsx_nodes += "}, data: { label: '" + temp2[1] + "' }, type: 'input' },\n"
             else:
                 jsx_nodes += "}, data: { label: '" + temp2[1] + "' } },\n"
     
@@ -74,7 +71,9 @@ def parse(code,file,fun_name_list):
 
 
     RePositionNodes = [-1]*(len(ElseNodes))
-
+    
+    inisource = "PicInput"
+    flag = 0
     for e in edges:
         YesOrNo = None
         temp = e.split("->")
@@ -86,6 +85,10 @@ def parse(code,file,fun_name_list):
             if(YesOrNo):
                 source = temp2[0]
                 target = temp[1]
+                if flag == 0:
+                    jsx_edges += "{ id: 'e" + inisource + "-" + source + "' , source: '" + inisource + "', target: '" + source
+                    jsx_edges += "' , markerEnd: edgemarker,  type: 'smoothstep'},\n"
+                    flag += 1
                 if(YesOrNo == 'yes'):
                     source_id = "CondiOUTbottom"
                 else:
@@ -96,6 +99,10 @@ def parse(code,file,fun_name_list):
             else:
                 source = temp[0]
                 target = temp[1]
+                if flag == 0:
+                    jsx_edges += "{ id: 'e" + inisource + "-" + source + "' , source: '" + inisource + "', target: '" + source
+                    jsx_edges += "' , markerEnd: edgemarker,  type: 'smoothstep'},\n"
+                    flag += 1
                 if source in ElseNodes:
                     i = first_Indexof(ElseNodes,source)
                     RePositionNodes[i] = target
@@ -200,9 +207,10 @@ def rmv_space(ls):
         re += [temp2]
     return re
 
-with open('test.py') as f:
+with open("/Users/matthew_gu/my-react-flow-app/Parse/test.py") as f:
     code = f.read()
 fc = Flowchart.from_code(code, field="main")
+# MUST SPECIFY FIELD
 print(fc.flowchart())
 print(parse(code,fc.flowchart(),get_fun_names(code)))
 

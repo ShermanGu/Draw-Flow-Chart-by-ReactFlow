@@ -37,6 +37,10 @@ def remove_rows_cols(input_grid: np.ndarray) -> np.ndarray:
     return np.delete(np.delete(input_grid, [3, 7], axis=1), [3, 7], axis=0)
 
 def main(input_grid: np.ndarray) -> np.ndarray:
+    if input_grid:
+        print(1)
+    else:
+        print(2)
     output_grid = np.zeros((9, 9))
     remove_grey_input_grid = remove_rows_cols(input_grid)
     sub_blocks = separate_sub_blocks(remove_grey_input_grid)
