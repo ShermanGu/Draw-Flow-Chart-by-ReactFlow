@@ -50,7 +50,7 @@ export default function process(data){
     var i;
     var initialNodes = [],initialEdges = [];
     for(i = 0; i< data.nodes.length; i++){
-        initialNodes = initialNodes.concat([{id: data.nodes[i].id, position:{x:0,y:0}, data:{label: '1'}}])    
+        initialNodes = initialNodes.concat([{id: data.nodes[i].id, position:{x:0,y:0}, data:{label: data.nodes[i].val}}])    
     }
     for(i = 0; i< data.edges.length; i++){
         initialEdges = initialEdges.concat([{ id: ('e' + data.edges[i][0] + '-' + data.edges[i][1]), source: data.edges[i][0], target:  data.edges[i][1], type: 'smoothstep'}])    
