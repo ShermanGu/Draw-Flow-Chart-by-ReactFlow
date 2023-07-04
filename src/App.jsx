@@ -10,6 +10,7 @@ import ReactFlow, {
   ReactFlowProvider,
 
 } from 'reactflow';
+import dagre from "dagre";
 
 import 'reactflow/dist/style.css';
 import './App.css';
@@ -85,10 +86,6 @@ function handleClick2(graphid){
 const [  initialNodes2,  initialEdges2 ] = process(data);
 
 
-
-console.log(initialNodes2)
-console.log(initialEdges2)
-
 export default function App() {
 
   const [nodes1, setNodes1, onNodesChange1] = useNodesState(initialNodes1);
@@ -97,7 +94,7 @@ export default function App() {
   const [edges2, setEdges2, onEdgesChange2] = useEdgesState(initialEdges2);
 
   return(
-  <div className = "body">
+    <div className = "body">
     <div id = "1" className='tabcontent'>
       <ReactFlowProvider>
         <div className="providerflow">
@@ -128,10 +125,11 @@ export default function App() {
               onNodesChange={onNodesChange2}
               onEdgesChange={onEdgesChange2}
               nodeTypes={nodeTypes}
+              connectionLineType={ConnectionLineType.SmoothStep}
               fitView
               >
               <Controls />
-              <Background variant="dots" gap={12} size={1} />
+              <Background variant="dots" gap={12} size={2} />
             </ReactFlow>
           </div>
         </div>
@@ -170,5 +168,4 @@ export default function App() {
   
   
   );
-
 }
