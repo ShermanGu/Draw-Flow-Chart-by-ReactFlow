@@ -16,7 +16,6 @@ import 'reactflow/dist/style.css';
 import './App.css';
 import data1 from './test1.json';
 import data2 from './test2.json';
-import pic from './000039220015.jpg';
 
 import PicInputNode from './PicInputNode';
 import ParentNode from './ParentNode';
@@ -58,8 +57,6 @@ function handleClick2(graphid){
 
 const [  initialNodes1,  initialEdges1 ] = process(data1);
 const [  initialNodes2,  initialEdges2 ] = process(data2);
-
-console.log(initialNodes2)
 
 
 export default function App() {

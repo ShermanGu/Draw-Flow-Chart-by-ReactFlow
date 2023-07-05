@@ -50,7 +50,7 @@ export default function process(data){
     var i;
     var initialNodes = [],initialEdges = [];
     for(i = 0; i< data.nodes.length; i++){
-      if(data.nodes[i].type == "val"){
+      if(data.nodes[i].type == "val" && data.nodes[i].val.charAt(0) == '['){
         initialNodes = initialNodes.concat([{id: data.nodes[i].id, position:{x:0,y:0}, data:{sor: data.nodes[i].val}, type: 'PicNode'}])    
       }else{
         initialNodes = initialNodes.concat([{id: data.nodes[i].id, position:{x:0,y:0}, data:{label: data.nodes[i].val}}])    

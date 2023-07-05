@@ -7,6 +7,12 @@ import { Grid } from '@mui/material';
 
 const size = 10;
 
+function transpose(matrix) {
+  return matrix.reduce((prev, next) => next.map((item, i) =>
+    (prev[i] || []).concat(next[i])
+  ), []);
+}
+
 function StringToArray(str){
   var i,flag;
   var re = [];
@@ -46,7 +52,7 @@ function StringToArray(str){
   if(temp.length > 0){
     re.push(temp)
   }
-  return re;
+  return transpose(re);
 }
 
 const ColorBox = ({ color, size}) => {
