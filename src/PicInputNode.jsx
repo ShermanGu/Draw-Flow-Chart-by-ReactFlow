@@ -43,6 +43,9 @@ function StringToArray(str){
     }
     
   }
+  if(temp.length > 0){
+    re.push(temp)
+  }
   return re;
 }
 
@@ -64,7 +67,6 @@ const ColorBox = ({ color, size}) => {
 function NumberToPic({data, isConnectable}){
 
   const grid = StringToArray(data.sor)
-
   return (
     <>
       <Handle

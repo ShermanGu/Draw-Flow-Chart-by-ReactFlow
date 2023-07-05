@@ -49,15 +49,12 @@ const getLayoutedElements = (nodes, edges, direction = "TB") => {
 export default function process(data){
     var i;
     var initialNodes = [],initialEdges = [];
-    var counter = 1;
-    /* Used to count this node is a pic node or not*/
     for(i = 0; i< data.nodes.length; i++){
-      if(counter%2 == 1){
+      if(data.nodes[i].type == "val"){
         initialNodes = initialNodes.concat([{id: data.nodes[i].id, position:{x:0,y:0}, data:{sor: data.nodes[i].val}, type: 'PicNode'}])    
       }else{
         initialNodes = initialNodes.concat([{id: data.nodes[i].id, position:{x:0,y:0}, data:{label: data.nodes[i].val}}])    
       }
-      counter += 1
     }
     
     for(i = 0; i< data.edges.length; i++){
