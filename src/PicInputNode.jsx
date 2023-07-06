@@ -74,28 +74,31 @@ function NumberToPic({data, isConnectable}){
 
   const grid = StringToArray(data.sor)
   return (
-    <>
+    <div className = 'DefaultNode'>
       <Handle
         type="target"
         position={Position.Top}
         id="PicIN"
         isConnectable={isConnectable}
       />
-      <Grid item>
-        <Box sx={{ display: 'flex', flexGrow: 1 }}>
-          {grid.map((row, rowIndex) => (
-            <div key={rowIndex}>
-              {row.map((cell, colIndex) => (
-                <ColorBox
-                  key={colIndex}
-                  color={numberToColor(cell)}
-                  size={size}
-                />
-              ))}
-            </div>
-          ))}
-        </Box>
-      </Grid>
+      
+      <div className='Pic'>
+        <Grid item>
+          <Box sx={{ display: 'flex', flexGrow: 1 }}>
+            {grid.map((row, rowIndex) => (
+              <div key={rowIndex}>
+                {row.map((cell, colIndex) => (
+                  <ColorBox
+                    key={colIndex}
+                    color={numberToColor(cell)}
+                    size={size}
+                  />
+                ))}
+              </div>
+            ))}
+          </Box>
+        </Grid>
+      </div>
 
       <Handle
         type="source"
@@ -103,7 +106,7 @@ function NumberToPic({data, isConnectable}){
         id="PicOUT"
         isConnectable={isConnectable}
       />
-    </>
+    </div>
     );
 };
 

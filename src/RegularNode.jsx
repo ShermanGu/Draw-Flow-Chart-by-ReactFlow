@@ -11,19 +11,13 @@ export default memo(({ data, isConnectable }) => {
         id="CondiIN"
         isConnectable={isConnectable}
       />
-      <div>
+      <div className='Text'>
         {data.label}
       </div>
       <Handle
         type="source"
-        position={Position.Left}
+        position={Position.Bottom}
         id="LeftEdge"
-        isConnectable={isConnectable}
-      />
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="RightEdge"
         isConnectable={isConnectable}
       />
     </div>

@@ -18,20 +18,19 @@ import data1 from './test1.json';
 import data2 from './test2.json';
 
 import PicInputNode from './PicInputNode';
-import ParentNode from './ParentNode';
+import RegularNode from './RegularNode';
+import StmtNode from './StmtNode';
+
 import FloNode from './FloNode';
 import process from './process';
 
 
 const nodeTypes = {
   PicNode: PicInputNode,
-  ParentNode: ParentNode,
+  RegulNode: RegularNode,
+  StmtNode: StmtNode,
   FloatNode: FloNode
 };
-
-
-
-
 
 
 function handleClick1(subtabid){
@@ -101,7 +100,7 @@ export default function App() {
               fitView
               >
               <Controls />
-              <Background variant="dots" gap={12} size={2} />
+              <Background variant="dots" gap={12} size={1} />
             </ReactFlow>
           </div>
         </div>
